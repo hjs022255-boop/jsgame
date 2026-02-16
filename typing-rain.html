@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>영어 타자 낙하 게임</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Nanum+Brush+Script&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="typing-rain.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hud">
+        <div class="hearts" id="hearts" aria-label="life">❤ ❤ ❤ ❤ ❤</div>
+        <div class="scores">
+          <span>점수 <strong id="score">0</strong></span>
+          <span>최고기록 <strong id="high-score">0</strong></span>
+          <span>언어 <strong id="mode-language">영어</strong></span>
+          <span>난이도 <strong id="mode-difficulty">보통</strong></span>
+        </div>
+        <button id="restart-top-btn" class="restart-top-btn" type="button">다시시작</button>
+      </header>
+
+      <section class="playfield-wrap">
+        <div id="playfield" class="playfield"></div>
+        <div id="start-screen" class="overlay">
+          <div class="start-panel">
+            <div class="word-source menu-hero menu-hero-left mode-korean" aria-hidden="true">
+              <div class="source-cloud"></div>
+              <div class="source-figure">
+                <div class="source-hat"></div>
+                <div class="source-head"></div>
+                <div class="source-hair"></div>
+                <div class="source-brows"></div>
+                <div class="source-eyes"></div>
+                <div class="source-nose"></div>
+                <div class="source-mouth"></div>
+                <div class="source-beard"></div>
+                <div class="source-ear source-ear-left"></div>
+                <div class="source-ear source-ear-right"></div>
+                <div class="source-body"></div>
+                <div class="source-collar"></div>
+                <div class="source-lapel source-lapel-left"></div>
+                <div class="source-lapel source-lapel-right"></div>
+                <div class="source-emblem"></div>
+                <div class="source-tie"></div>
+                <div class="source-arm">
+                  <div class="source-hand">
+                    <span class="finger f1"></span>
+                    <span class="finger f2"></span>
+                    <span class="finger f3"></span>
+                    <span class="finger f4"></span>
+                    <span class="finger f5"></span>
+                  </div>
+                </div>
+                <div class="source-basket"></div>
+                <div class="source-name">세종대왕</div>
+              </div>
+            </div>
+            <div class="word-source menu-hero menu-hero-right mode-english" aria-hidden="true">
+              <div class="source-cloud"></div>
+              <div class="source-figure">
+                <div class="source-hat"></div>
+                <div class="source-head"></div>
+                <div class="source-hair"></div>
+                <div class="source-brows"></div>
+                <div class="source-eyes"></div>
+                <div class="source-nose"></div>
+                <div class="source-mouth"></div>
+                <div class="source-beard"></div>
+                <div class="source-ear source-ear-left"></div>
+                <div class="source-ear source-ear-right"></div>
+                <div class="source-body"></div>
+                <div class="source-collar"></div>
+                <div class="source-lapel source-lapel-left"></div>
+                <div class="source-lapel source-lapel-right"></div>
+                <div class="source-emblem"></div>
+                <div class="source-tie"></div>
+                <div class="source-arm">
+                  <div class="source-hand">
+                    <span class="finger f1"></span>
+                    <span class="finger f2"></span>
+                    <span class="finger f3"></span>
+                    <span class="finger f4"></span>
+                    <span class="finger f5"></span>
+                  </div>
+                </div>
+                <div class="source-basket"></div>
+                <div class="source-name">도널드 트럼프</div>
+              </div>
+            </div>
+            <div class="menu-core">
+              <h1 class="game-title" data-title="한준섭의 타자께임!">한준섭의 타자께임!</h1>
+              <h2 id="menu-title">타자 낙하 게임 시작</h2>
+              <p id="menu-subtitle">언어와 난이도를 선택하고 시작하세요.</p>
+              <div class="option-group">
+                <p>언어 선택</p>
+                <label><input type="radio" name="lang" value="english" checked /> 영어</label>
+                <label><input type="radio" name="lang" value="korean" /> 한글</label>
+              </div>
+              <div class="option-group">
+                <p>난이도 선택</p>
+                <label><input type="radio" name="difficulty" value="1" /> 1단계</label>
+                <label><input type="radio" name="difficulty" value="2" checked /> 2단계</label>
+                <label><input type="radio" name="difficulty" value="3" /> 3단계</label>
+                <label><input type="radio" name="difficulty" value="4" /> 4단계</label>
+                <label><input type="radio" name="difficulty" value="5" /> 5단계</label>
+              </div>
+              <div class="menu-records">
+                <div><span id="menu-high-en-label">영어 최고기록</span> <strong id="menu-high-en">0</strong></div>
+                <div><span id="menu-high-ko-label">한글 최고기록</span> <strong id="menu-high-ko">0</strong></div>
+              </div>
+              <button id="start-btn" type="button">게임 시작</button>
+            </div>
+          </div>
+        </div>
+        <div id="restart-confirm" class="overlay hidden">
+          <div class="confirm-panel">
+            <h2>게임을 다시시작하시겠습니까?</h2>
+            <div class="confirm-actions">
+              <button id="confirm-yes" type="button">예</button>
+              <button id="confirm-no" type="button">아니오</button>
+            </div>
+          </div>
+        </div>
+        <div id="fighter" class="fighter" aria-hidden="true">
+          <div class="fighter-body"></div>
+          <div class="fighter-cockpit"></div>
+          <div class="fighter-flame"></div>
+        </div>
+        <div id="word-source" class="word-source mode-korean" aria-hidden="true">
+          <div class="source-cloud"></div>
+          <div class="source-figure">
+            <div class="source-hat"></div>
+            <div class="source-head"></div>
+            <div class="source-hair"></div>
+            <div class="source-brows"></div>
+            <div class="source-eyes"></div>
+            <div class="source-nose"></div>
+            <div class="source-mouth"></div>
+            <div class="source-beard"></div>
+            <div class="source-ear source-ear-left"></div>
+            <div class="source-ear source-ear-right"></div>
+            <div class="source-body"></div>
+            <div class="source-collar"></div>
+            <div class="source-lapel source-lapel-left"></div>
+            <div class="source-lapel source-lapel-right"></div>
+            <div class="source-emblem"></div>
+            <div class="source-tie"></div>
+            <div class="source-arm">
+              <div id="source-hand" class="source-hand">
+                <span class="finger f1"></span>
+                <span class="finger f2"></span>
+                <span class="finger f3"></span>
+                <span class="finger f4"></span>
+                <span class="finger f5"></span>
+              </div>
+            </div>
+            <div class="source-basket"></div>
+            <div id="source-name" class="source-name">세종대왕</div>
+          </div>
+        </div>
+      </section>
+
+      <form id="typing-form" class="typing">
+        <input
+          id="typing-input"
+          type="text"
+          autocomplete="off"
+          placeholder="떨어지는 영어 단어를 입력 후 Enter"
+        />
+        <button type="submit">입력</button>
+      </form>
+
+      <div id="game-over-splash" class="game-over-splash hidden" aria-hidden="true">
+        <div class="game-over-text">GAME OVER</div>
+      </div>
+    </main>
+
+    <script src="typing-rain.js"></script>
+  </body>
+</html>
